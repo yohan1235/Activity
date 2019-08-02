@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">	
+
+	<insert id="add">
+	  insert into memb(mNum, email, pwd, nick, phone)
+	  values(mem_seq.nextval, #{email}, #{pwd},#{nick},#{phone})
+	</insert>
+	
+	<select id="selectEmail" resultType="int">
+	     select count(*) as cnt from memb where email = #{email}
+	</select>	
+	
+	<select id="selectAll" resultType="net.hb.crud.BoardDTO">
+	     select rownum rn, h.* from hobby h
+	</select>	
+		
+	<select id="selectDetail" resultType="net.hb.crud.BoardDTO">
+	     select * from hobby where hobby_idx = #{id}
+	</select>		
+	
+	<update id="update">
+		update hobby set name = #{name}, title = #{title}, content = #{content}, hobby = #{hobby}, img_file_name = #{img_file_name} where hobby_idx = #{hobby_idx}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+	    delete from  hobby where hobby_idx = #{id} 
+	</delete>
+	
+	<select id="countAll" resultType="int">
+	     select count(*)  from hobby 
+	</select>
+	
+	
+</mapper>
